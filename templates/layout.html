@@ -1,0 +1,24 @@
+<html>
+  <head>
+    {% if title %}
+      <title>{{ title }}</title>
+    {% else %}
+      <title>Adam's Book Review Site</title>
+    {% endif %}
+  </head>
+  <body>
+
+    <!-- Navigation Bar -->
+    <div>
+      <nav>
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('login') }}">Log In</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+      </nav>
+    </div>
+
+    <!-- The Main Content -->
+    {% block content %}
+    {% endblock %}
+  </body>
+</html>
