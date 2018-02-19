@@ -2,4 +2,22 @@
 
 {% block content %}
   <h1>Register</h1>
+
+  <div>
+    <form action="" method="post">
+      {{ form.hidden_tag() }}
+      <p>
+        {{ form.username.label }}
+        {{ form.username(size=32) }}
+      </p>
+      <p>
+          {{ form.password.label }}
+          {{ form.password(size=32) }}
+        </form>
+      </p>
+      <p>
+        {{ form.submit() }}
+      </p>
+    </form>
+  </div>
 {% endblock %}

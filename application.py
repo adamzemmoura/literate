@@ -1,9 +1,10 @@
 import os
 
-from flask import Flask, session, render_template, redirect
+from flask import Flask, session, render_template, redirect, url_for
 from flask_session import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
+from forms import SignUpForm
 
 app = Flask(__name__)
 
@@ -22,6 +23,9 @@ db = scoped_session(sessionmaker(bind=engine))
 
 # create some test data
 
+# set secret key in app.config
+app.config["SECRET_KEY"] = "you-will-never-guess-this"
+
 @app.route("/")
 def index():
     return render_template('index.html')
@@ -37,6 +41,7 @@ def logout():
 
 @app.route('/signup')
 def signup():
-    return render_template('signup.html', title='Sign Up')
+    form = SignUpForm()
+    return render_template('signup.html', title='Sign Up', form=form)
 
 app.run(debug=True)
