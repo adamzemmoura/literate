@@ -4,7 +4,7 @@ from flask import Flask, session, render_template, redirect, url_for
 from flask_session import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
-from forms import SignUpForm
+from forms import SignUpForm, LoginForm
 
 app = Flask(__name__)
 
@@ -21,8 +21,6 @@ Session(app)
 engine = create_engine(os.getenv("DATABASE_URL"))
 db = scoped_session(sessionmaker(bind=engine))
 
-# create some test data
-
 # set secret key in app.config
 app.config["SECRET_KEY"] = "you-will-never-guess-this"
 
@@ -32,7 +30,8 @@ def index():
 
 @app.route('/login')
 def login():
-    return render_template('login.html')
+    form = LoginForm()
+    return render_template('login.html', form=form)
 
 @app.route('/logout')
 def logout():

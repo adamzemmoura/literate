@@ -17,6 +17,18 @@
       </nav>
     </div>
 
+    <!-- Area to Flash messages to the user -->
+    <hr>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+    {% endwith %}
+
     <!-- The Main Content -->
     {% block content %}
     {% endblock %}

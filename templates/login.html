@@ -2,4 +2,27 @@
 
 {% block content %}
   <h1>Login Page</h1>
+  <div>
+    <form action="" method="post">
+      {{ form.hidden_tag() }}
+      <p>
+        {{ form.email.label }}
+        {{ form.email() }}
+        {% for error in form.email.errors %}
+          <span style="color: red;">{{ error }}</span>
+        {% endfor %}
+      </p>
+      <p>
+          {{ form.password.label }}
+          {{ form.password() }}
+          {% for error in form.password.errors %}
+            <span style="color: red;">{{ error }}</span>
+          {% endfor %}
+        </form>
+      </p>
+      <p>
+        {{ form.submit() }}
+      </p>
+    </form>
+  </div>
 {% endblock %}
