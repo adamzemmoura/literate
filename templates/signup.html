@@ -1,43 +1,10 @@
-{% extends 'layout.html' %}
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
 
-{% block content %}
-  <h1>Register</h1>
-
-  <div>
-    <form action="" method="post">
-      {{ form.hidden_tag() }}
-      <p>
-        {{ form.first_name.label }}
-        {{ form.first_name() }}
-        {% for error in form.first_name.errors %}
-          <span style="color: red;">{{ error }}</span>
-        {% endfor %}
-      </p>
-      <p>
-        {{ form.last_name.label }}
-        {{ form.last_name() }}
-        {% for error in form.last_name.errors %}
-          <span style="color: red;">{{ error }}</span>
-        {% endfor %}
-      </p>
-      <p>
-        {{ form.email.label }}
-        {{ form.email() }}
-        {% for error in form.email.errors %}
-          <span style="color: red;">{{ error }}</span>
-        {% endfor %}
-      </p>
-      <p>
-          {{ form.password.label }}
-          {{ form.password() }}
-          {% for error in form.password.errors %}
-            <span style="color: red;">{{ error }}</span>
-          {% endfor %}
-        </form>
-      </p>
-      <p>
-        {{ form.submit() }}
-      </p>
-    </form>
+{% block page_content %}
+  <div class="page-header">
+    <h1>Register</h1>
+  </div>
+    {{ wtf.quick_form(form) }}
   </div>
 {% endblock %}

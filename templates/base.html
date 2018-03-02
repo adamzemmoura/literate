@@ -1,0 +1,66 @@
+{% extends 'bootstrap/base.html' %}
+
+<html>
+  <head>
+    {% block title %}
+      {% if title %}
+        <title>{{ title }}</title>
+      {% else %}
+        <title>Adam's Book Review Site</title>
+      {% endif %}
+    {% endblock %}
+  </head>
+  <body>
+
+    <!-- Bootstrap Navigation Bar -->
+    {% block navbar %}
+      <div class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" name="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle Navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Lite<i style='color: white;'>rate</i></a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li>
+                <a href="{{ url_for('index') }}">Home</a>
+              </li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+              {% if user %}
+                <li>
+                  <a href="{{  url_for('logout') }}">Sign Out</a>
+                </li>
+              {% else %}
+              <li>
+                <a href="{{  url_for('login') }}">Sign In</a>
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    {% endblock %}
+
+    {% block content %}
+      <div class="container">
+
+        <!-- Display Flashed Messages -->
+        {% for message in get_flashed_messages() %}
+          <div class="alert alert-warning">
+            <button type="button" class="close" data-dismiss="alert" name="button">&times;</button>
+            {{ message }}
+          </div>
+        {% endfor %}
+
+        {% block page_content %}{% endblock %}
+      </div>
+    {% endblock %}
+  </body>
+</html>
