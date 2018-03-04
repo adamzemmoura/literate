@@ -6,8 +6,9 @@
       {% if title %}
         <title>{{ title }}</title>
       {% else %}
-        <title>Adam's Book Review Site</title>
+        <title>Literate</title>
       {% endif %}
+
     {% endblock %}
   </head>
   <body>
@@ -23,12 +24,12 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Lite<i style='color: white;'>rate</i></a>
+            <a class="navbar-brand" href="{{ url_for('search_author') }}">Lite<i style='color: white;'>rate</i></a>
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
               <li>
-                <a href="{{ url_for('index') }}">Home</a>
+                <a href="{{ url_for('search_author') }}">Search</a>
               </li>
             </ul>
 

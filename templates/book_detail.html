@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block page_content %}
+
+  <!-- Breadcrumb navigation bar -->
+  <ol class="breadcrumb">
+    <li><a href="{{ url_for('search_author') }}">Search</a></li>
+    <li class="active">{{ book.title }}</li>
+  </ol>
+
+  <!-- Title -->
+  <h2 class="text-center" style="color: purple;">{{ book.title }}</h2>
+  <hr>
+
+  <!-- Book details -->
+  <h3 class="text-center">Details</h3>
+  <div class="panel panel-default text-center">
+    <div class="panel-body">
+      <div class="col-sm-6 text-right">
+        <p>Written by : </p>
+        <p>Year of publication : </p>
+        <p>ISBN number : </p>
+      </div>
+      <div class="col-sm-6 text-left">
+        <p><b>{{book.author}}</b></p>
+        <p><b>{{book.year}}</b></p>
+        <p><b>{{book.isbn}}</b></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reviews -->
+  <h3 class="text-center">Reviews</h3>
+  <div class="panel panel-default text-center">
+    <div class="panel-body">
+      {% if goodread_reviews %}
+
+        {{ goodread_reviews }}
+      {% endif %}
+    </div>
+  </div>
+
+{% endblock %}

@@ -1,8 +1,74 @@
 {% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
 
 {% block page_content %}
   <div class="page-header">
-      <h1>Lite<i style='color: purple;'>rate</i></h1>
+      <h1 class="text-center">Lite<i style='color: purple;'>rate</i></h1>
+      <h4 class="text-center" style="color: grey;">Find it. Read it. Rate it.</h4>
   </div>
+
+  <form method="post">
+    {{ form.hidden_tag() }}
+
+    <div class="form-group">
+
+      <div class="container">
+        <div class="row">
+          <p class="">
+            {{ form.search_text.label }}
+              {% if search_type == 'author' %}
+                <a class="btn btn-default active" href="{{ url_for('search_author') }}" role="button">Author</a>
+                <a class="btn btn-default" href="{{ url_for('search_title') }}" role="button">Title</a>
+                <a class="btn btn-default" href="{{ url_for('search_isbn') }}" role="button">ISBN</a>
+              {% elif search_type == 'title' %}
+                <a class="btn btn-default " href="{{ url_for('search_author') }}" role="button">Author</a>
+                <a class="btn btn-default active" href="{{ url_for('search_title') }}" role="button">Title</a>
+                <a class="btn btn-default" href="{{ url_for('search_isbn') }}" role="button">ISBN</a>
+              {% else %}
+                <a class="btn btn-default " href="{{ url_for('search_author') }}" role="button">Author</a>
+                <a class="btn btn-default" href="{{ url_for('search_title') }}" role="button">Title</a>
+                <a class="btn btn-default active" href="{{ url_for('search_isbn') }}" role="button">ISBN</a>
+              {% endif %}
+
+          </p>
+        </div>
+      </div>
+      {{ form.search_text(class='form-control') }}
+
+    </div>
+    {{ form.submit(class='btn btn-primary ') }}
+
+  </form>
+
+
+  {% if search_results %}
+
+    <h3 class="text-center">{{ result_count }} result(s) for {{ search_text }}</h3>
+
+    <table class="table table-hover" style="margin-top: 20px;">
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Publication Year</th>
+        <th>ISBN</th>
+        <th></th>
+      </tr>
+      <tbody>
+        {% for book in search_results %}
+          <tr>
+            <td>{{ book.title }}</td>
+            <td>{{ book.author }}</td>
+            <td>{{ book.year }}</td>
+            <td>{{ book.isbn }}</td>
+            <td>
+              <a class="btn btn-primary" href="{{ url_for('book_detail', isbn=book.isbn) }}">Reviews</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+
+    </table>
+
+  {% endif %}
 
 {% endblock %}
