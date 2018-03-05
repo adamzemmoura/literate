@@ -184,7 +184,6 @@ def signup():
         db.commit()
         flash(f'{form.first_name.data} {form.last_name.data} is now registered')
         user = db.execute("SELECT * FROM users WHERE email = :email", {"email": form.email.data}).fetchone()
-        flash(f'user: {user}')
         session['user_name'] = f'{user.first_name} {user.last_name}'
         session['user_id'] = f'{user.id}'
         return redirect(url_for('search_author'))
