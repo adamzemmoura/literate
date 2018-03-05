@@ -46,17 +46,17 @@ The app checks that both environment variables are set, raising a RuntimeError i
 
 7. **Review Submission: On the book page, users should be able to submit a review: consisting of a rating on a scale of 1 to 5, as well as a text component to the review where the user can write their opinion about a book. Users should not be able to submit multiple reviews for the same book.**
 
-  The form that renders if the user hasn't already entered a review accepts the text of review and a rating out of 5.  When submitted, a confirmation message flashes to the top of the app and the app is redirected to the book_detail view, which re-renders the book_detail page, this time without the ability to leave (another) review.
+    The form that renders if the user hasn't already entered a review accepts the text of review and a rating out of 5.  When submitted, a confirmation message flashes to the top of the app and the app is redirected to the book_detail view, which re-renders the book_detail page, this time without the ability to leave (another) review.
 
 8. **Goodreads Review Data: On your book page, you should also display (if available) the average rating and number of ratings the work has received from Goodreads**
 
-  The average rating and number of ratings is displayed in the top panel of the book_detail page.  If no data available, a message to that effect is displayed in it's place.  
+    The average rating and number of ratings is displayed in the top panel of the book_detail page.  If no data available, a message to that effect is displayed in it's place.  
 
 9. **API Access: If users make a GET request to your website’s /api/<isbn> route, where <isbn> is an ISBN number, your website should return a JSON response containing the book’s title, author, publication date, ISBN number, review count, and average score.**
 
-  The API consists of the one required endpoint at /api/book/<isbn> The JSON response includes all the required data as per the requirement.  The review count and average score are the review and average score from this site (not goodreads). If the isbn is not in the database, the JSON response includes an message under the key of 'error' and returns a 404.
+    The API consists of the one required endpoint at /api/book/<isbn> The JSON response includes all the required data as per the requirement.  The review count and average score are the review and average score from this site (not goodreads). If the isbn is not in the database, the JSON response includes an message under the key of 'error' and returns a 404.
 
 10. **Additional requirements**
-  - Only used sqlalchemy with raw SQL commands throughout, not ORM.
-  - Completed this README with write up.
-  - requirements.txt was updated using pip freeze > requirements.txt
+    - Only used sqlalchemy with raw SQL commands throughout, not ORM.
+    - Completed this README with write up.
+    - requirements.txt was updated using pip freeze > requirements.txt
