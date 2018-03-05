@@ -26,5 +26,5 @@ class BookSearchForm(FlaskForm):
 
 class ReviewForm(FlaskForm):
     review_body = TextAreaField('What did you think?', validators=[DataRequired()])
-    rating = SelectField('Rating out 5', choices=[('5', '5'), ('4', '4'), ('3', '3'), ('2', '2'), ('1', '1')])
+    rating = SelectField('Rating out of 5?', choices=[('5', '5'), ('4', '4'), ('3', '3'), ('2', '2'), ('1', '1')])
     submit = SubmitField('Submit')

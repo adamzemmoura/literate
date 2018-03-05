@@ -96,7 +96,7 @@ def search_title():
         if result_count == 0:
             flash(f'Sorry, there was no results for {form.search_text.data}.')
 
-    return render_template('index.html', user=session.get('user_name'), form=form, result_count=result_count, search_text=form.search_text.data,
+    return render_template('index.html', title="Literate | Search", user=session.get('user_name'), form=form, result_count=result_count, search_text=form.search_text.data,
                             search_results=search_results, search_type=session.get('search_type'))
 
 @app.route('/search/isbn', methods=['GET', 'POST'])
@@ -125,7 +125,7 @@ def search_isbn():
         if result_count == 0:
             flash(f'Sorry, there was no results for {form.search_text.data}.')
 
-    return render_template('index.html', user=session.get('user_name'), form=form, result_count=result_count, search_results=search_results,
+    return render_template('index.html', title="Literate | Search", user=session.get('user_name'), form=form, result_count=result_count, search_results=search_results,
                             search_text=form.search_text.data, search_type=session.get('search_type'))
 
 @app.route('/book/<string:isbn>', methods=['GET', 'POST'])
