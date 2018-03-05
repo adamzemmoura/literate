@@ -14,7 +14,7 @@
 
       <div class="container">
         <div class="row">
-          <p class="col-xs-6 col-xs-offset-3">
+          <p class="">
 
             {{ form.search_text.label }}
 
@@ -37,13 +37,13 @@
       </div>
       <div class="row">
         <div class="col-xs-6 col-xs-offset-3">
-          {{ form.search_text(class='form-control') }}
+          {{ form.search_text(class='form-control', style="text-align: center;", placeholder="Enter search text") }}
         </div>
       </div>
     </div> <!-- end of form group -->
 
     {{ form.submit(class='btn btn-primary ') }}
-    
+
   </form>
 
 

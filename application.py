@@ -53,7 +53,8 @@ def search_author():
     # update search SearchType to author
     session['search_type'] = SearchType.author.name
 
-    check_user_logged_in()
+    if user_not_logged_in():
+        return redirect(url_for('login'))
 
     form = BookSearchForm()
     search_results = None
@@ -79,7 +80,8 @@ def search_title():
     # update search SearchType to title
     session['search_type'] = SearchType.title.name
 
-    check_user_logged_in()
+    if user_not_logged_in():
+        return redirect(url_for('login'))
 
     form = BookSearchForm()
     search_results = None
@@ -104,7 +106,8 @@ def search_isbn():
     # update search SearchType
     session['search_type'] = SearchType.isbn.name
 
-    check_user_logged_in()
+    if user_not_logged_in():
+        return redirect(url_for('login'))
 
     form = BookSearchForm()
     search_results = None
@@ -131,7 +134,9 @@ def search_isbn():
 @app.route('/book/<string:isbn>', methods=['GET', 'POST'])
 def book_detail(isbn):
 
-    check_user_logged_in()
+    if user_not_logged_in():
+        return redirect(url_for('login'))
+
     user_id = session.get('user_id')
 
     # get the book review for the signed in user for the currently displayed book, if there is one.
@@ -167,7 +172,8 @@ def book_detail(isbn):
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
 
-    check_user_logged_in()
+    if user_not_logged_in():
+        return redirect(url_for('login'))
 
     form = SignUpForm()
 
@@ -187,7 +193,8 @@ def signup():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 
-    check_user_logged_in()
+    if user_not_logged_in() == False:
+        return redirect(url_for('seach_author'))
 
     form = LoginForm()
     if form.validate_on_submit():
@@ -250,10 +257,9 @@ def api_book_details(isbn):
         "average_score": average_score,
     }), 200
 
-def check_user_logged_in():
+def user_not_logged_in():
     # Check to see if the user is logged in already, redirect to login if not.
-    if session.get('user_id') is None:
-        return redirect(url_for('login'))
+    return session.get('user_id') is None
 
 def get_goodreads_book_reviews(isbn):
     res = requests.get("https://www.goodreads.com/book/review_counts.json",
