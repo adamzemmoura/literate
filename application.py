@@ -72,7 +72,7 @@ def search_author():
             flash(f'Sorry, there was no results for {form.search_text.data}.')
 
     return render_template('index.html', title="Literate | Search", user=session.get('user_name'), form=form, search_results=search_results,
-                            result_count=result_count, search_text=form.search_text.data, search_type=search_type.name))
+                            result_count=result_count, search_text=form.search_text.data, search_type=session.get('search_type'))
 
 @app.route('/search/title', methods=['GET', 'POST'])
 def search_title():
