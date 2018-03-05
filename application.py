@@ -172,8 +172,8 @@ def book_detail(isbn):
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
 
-    if user_not_logged_in():
-        return redirect(url_for('login'))
+    if user_not_logged_in() is False:
+        return redirect(url_for('search_author'))
 
     form = SignUpForm()
 
