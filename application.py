@@ -221,13 +221,20 @@ def logout():
 def api_book_details(isbn):
 
     book = db.execute('SELECT * FROM books WHERE isbn = :isbn', {'isbn': isbn}).fetchone()
-    reviews = db.execute('SELECT first_name, last_name, body, rating FROM users, reviews WHERE users.id = reviews.user_id').fetchall()
+    reviews = db.execute('SELECT first_name, last_name, body, rating FROM users, reviews WHERE users.id = reviews.user_id AND reviews.book_isbn = :isbn', {"isbn": isbn}).fetchall()
     ratings_sum = db.execute("SELECT SUM(rating) FROM reviews WHERE book_isbn = :isbn", {"isbn": isbn}).fetchone()[0]
 
     review_count = 0
+    average_score = 0
+
+    if ratings_sum is None:
+        ratings_sum = 0
 
     if reviews is not None:
         review_count = len(reviews)
+
+    if ratings_sum != 0 and review_count != 0:
+        average_score = ratings_sum / review_count
 
     if book is None:
         return jsonify({
@@ -240,7 +247,7 @@ def api_book_details(isbn):
         "year": book.year,
         "isbn": book.isbn,
         "review_count": review_count,
-        "average_score": ratings_sum / review_count,
+        "average_score": average_score,
     }), 200
 
 def check_user_logged_in():
